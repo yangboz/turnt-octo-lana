@@ -4,15 +4,25 @@
     <link rel="stylesheet" href = "http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
 
-<body ng-controller="userController">
+<br><br>
 
-<div class="container">
-    <div ng-include="'myUsers_List.html'"></div>
-    <div ng-include="'myUsers_Form.html'"></div>
+<<div class="collapse navbar-collapse" ng-controller="HeaderController">
+    <ul class="nav navbar-nav">
+        <li ng-class="{ active: isActive('/')}"><a href="/">Home</a></li>
+        <li ng-class="{ active: isActive('/dogs')}"><a href="/dogs">Dogs</a></li>
+        <li ng-class="{ active: isActive('/cats')}"><a href="/cats">Cats</a></li>
+    </ul>
 </div>
+<div ng-view></div>
 
-<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
-<script src= "myUsers.js"></script>
+<script src= "../angular.js"></script>
+<script>
+    function HeaderController($scope,$location){
+        $scope.isActive = function(viewLocation){
+            return viewLocation === $location.path();
+        }
+    }
+</script>
 
 </body>
 </html>

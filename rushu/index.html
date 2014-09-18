@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title ng-bind="metaTitle"></title>
+    <meta name="description" ng-bind="metaTitle" />
+    <meta name="robots" content="noindex, follow" ng-if="noIndexFollow">
+    <meta name="fragment" content="!" />
+
+    <title>RUSHU</title>
+
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/jquery/jquery-1.11.1.min.js"></script>
+    <script src="lib/bootstrap/bootstrap.min.js"></script>
+    <script src="lib/ui-bootstrap/ui-bootstrap-0.6.0.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/factories.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/directives.js"></script>
+
+    <link href="css/themes/slate/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href = "css/app.css">
+</head>
+<body>
+
+<nav ng-controller="NavController" class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#!/" ng-bind="globals.siteTitle"></a>
+        </div>
+
+        <div class="navbar-collapse" ng-class="isCollapsed ? 'collapse' : 'in'">
+            <ul class="nav navbar-nav">
+                <li ng-class="getClass('/')"><a href="#!/"><span class="glyphicon glyphicon-home"></span> Rushu</a></li>
+                <li ng-class="getClass('/EEM')"><a href="#!/eem"><span class="glyphicon glyphicon-picture"></span> EEM</a></li>
+                <li ng-class="getClass('/About')"><a href="#!/about"><span class="glyphicon glyphicon-film"></span> About</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" ng-view>
+    <!-- Route-dependent content goes here -->
+</div>
+
+</body>
+</html>
