@@ -11,46 +11,66 @@
 
     <title>RUSHU</title>
 
-    <script src="lib/angular/angular.min.js"></script>
-    <script src="lib/jquery/jquery-1.11.1.min.js"></script>
-    <script src="lib/bootstrap/bootstrap.min.js"></script>
-    <script src="lib/ui-bootstrap/ui-bootstrap-0.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/app.css">
 
-    <script src="js/app.js"></script>
-    <script src="js/factories.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/directives.js"></script>
-
-    <link href="css/themes/slate/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href = "css/app.css">
 </head>
 <body>
 
-<nav ng-controller="NavController" class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#!/" ng-bind="globals.siteTitle"></a>
-        </div>
+<body ng-controller="RootCtrl">
 
-        <div class="navbar-collapse" ng-class="isCollapsed ? 'collapse' : 'in'">
+<div class="container" ng-show="loggedin">
+    <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
+                    class="icon-bar"></span><span class="icon-bar"></span>
+            </button>
+            <!--<a class="navbar-brand" href="http://www.jquery2dotnet.com">Brand</a>-->
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ng-class="getClass('/')"><a href="#!/"><span class="glyphicon glyphicon-home"></span> Rushu</a></li>
-                <li ng-class="getClass('/EEM')"><a href="#!/eem"><span class="glyphicon glyphicon-picture"></span> EEM</a></li>
-                <li ng-class="getClass('/About')"><a href="#!/about"><span class="glyphicon glyphicon-film"></span> About</a></li>
+                <li class="active"><a ng-click="changeView('dashboard')"><span class="glyphicon glyphicon-home"></span>Dashboard</a>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-calendar"></span>My Tasks</a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                        class="glyphicon glyphicon-list-alt"></span>Administer <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a ng-click="changeView('users')">Users</a></li>
+                        <li><a ng-click="changeView('groups')">Groups</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ng-show="loggedin" class="dropdown" ng-show="loggedin"><a href="#" class="dropdown-toggle"
+                                                                              data-toggle="dropdown"><span
+                        class="glyphicon glyphicon-user"></span>{{loggedUser.firstName +' ' +loggedUser.lastName }} <b
+                        class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-cog"></span>Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
-    </div>
-</nav>
-
-<div class="container" ng-view>
-    <!-- Route-dependent content goes here -->
+        <!-- /.navbar-collapse -->
+    </nav>
 </div>
+
+<!-- Actual content below header -->
+<div ng-view></div>
+
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular/angular-resource.js"></script>
+<script src="lib/angular/angular-route.js"></script>
+<script src="lib/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+<script src="js/controller.js"></script>
+<link rel="stylesheet" href="css/bootstrap.theme.css">
 
 </body>
 </html>
