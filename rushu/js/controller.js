@@ -226,12 +226,12 @@ rushuApp.controller('GroupsCtrl', function ($scope, $rootScope, $location, Group
 });
 
 rushuApp.factory('UserService', function ($resource) {
-    var data = $resource('service/identity/users/:user', {user: "@user"});
+    var data = $resource('http://localhost:8080/activiti-rest/service/identity/users/:user', {user: "@user"});
     return data;
 });
 
 rushuApp.factory('GroupService', function ($resource) {
-    var data = $resource('service/identity/groups/:group', {group: "@group"});
+    var data = $resource('http://localhost:8080/activiti-rest/service/identity/groups/:group', {group: "@group"});
     return data;
 });
 
