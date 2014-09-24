@@ -2,9 +2,7 @@
 <!--
   ** NOTE **
 
-  Run `grunt connect` then
-  navigate to http://localhost:3000/demo
-  to see this page in browser
+  Vendors:jQuery,AngularJS,mobile-angular-ui,jPlot,syntaxhighter
 
   -->
 <html>
@@ -21,44 +19,72 @@
     <link rel="stylesheet" href="vendor/mobile-angular-ui/css/mobile-angular-ui-base.min.css" />
     <link rel="stylesheet" href="vendor/mobile-angular-ui/css/mobile-angular-ui-desktop.min.css" />
     <link rel="stylesheet" href="styles/app.css" />
+    <script class="include" type="text/javascript" src="vendor/jquery/jquery-1.11.1.min.js"></script>
+    <!--jPlot js/css links-->
+    <link class="include" rel="stylesheet" type="text/css" href="vendor/jPlot/jquery.jqplot.min.css" />
+    <!--<link rel="stylesheet" type="text/css" href="examples.min.css" />-->
+    <link type="text/css" rel="stylesheet" href="vendor/syntaxhighlighter/styles/shCoreDefault.min.css" />
+    <link type="text/css" rel="stylesheet" href="vendor/syntaxhighlighter/styles/shThemejqPlot.min.css" />
+    <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="vendor/jPlot/excanvas.js"></script><![endif]-->
+    <script class="include" type="text/javascript" src="vendor/jquery/jquery-1.11.1.min.js"></script>
+    <!-- End example scripts -->
+    <!-- Don't touch this! -->
+    <script class="include" type="text/javascript" src="vendor/jPlot/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="vendor/syntaxhighlighter/scripts/shCore.min.js"></script>
+    <script type="text/javascript" src="vendor/syntaxhighlighter/scripts/shBrushJScript.min.js"></script>
+    <script type="text/javascript" src="vendor/syntaxhighlighter/scripts/shBrushXml.min.js"></script>
+    <!-- End Don't touch this! -->
+
+    <!-- Additional plugins go here -->
+
+    <script class="include" type="text/javascript" src="vendor/jPlot/plugins/jqplot.pieRenderer.min.js"></script>
+
+    <!-- End additional plugins -->
+
     <script src="vendor/mobile-angular-ui/js/angular.min.js"></script>
     <script src="vendor/mobile-angular-ui/js/angular-route.min.js"></script>
     <script src="vendor/mobile-angular-ui/js/angular-touch.min.js"></script>
     <script src="vendor/mobile-angular-ui/js/mobile-angular-ui.min.js"></script>
+    <script src="vendor/angular/ui-chart.min.js"></script>
     <script src="scripts/app.js"></script>
 </head>
-<body ng-app="MobileAngularUiExamples" ng-controller="MainController" >
+<body ng-app="rushuApp" ng-controller="MainController" >
 
 <!-- Sidebars -->
+<!--
 <div ng-include="'sidebar.html'" class="sidebar sidebar-left" toggleable parent-active-class="sidebar-left-in" id="mainSidebar"></div>
 
 <div ng-include="'sidebarRight.html'" class="sidebar sidebar-right" toggleable parent-active-class="sidebar-right-in" id="rightSidebar"></div>
-
+-->
 <div class="app">
 
     <!-- Navbars -->
 
     <div class="navbar navbar-app navbar-absolute-top">
-        <div class="navbar-brand navbar-brand-center" yield-to="title">
-            <span>Mobile Angular UI</span>
-        </div>
+
         <div class="btn-group pull-left">
             <div ng-click="toggle('mainSidebar')" class="btn btn-navbar sidebar-toggle">
                 <i class="fa fa-bars"></i> Menu
             </div>
         </div>
+        <div class="navbar-brand navbar-brand-center" yield-to="title">
+            <span>HOME</span>
+        </div>
+        <!--
         <div class="btn-group pull-right" yield-to="navbarAction">
             <div ng-click="toggle('rightSidebar')" class="btn btn-navbar">
                 <i class="fa fa-comment"></i> Chat
             </div>
         </div>
+        -->
     </div>
 
     <div class="navbar navbar-app navbar-absolute-bottom">
         <div class="btn-group justified">
-            <a href="http://mobileangularui.com/" class="btn btn-navbar"><i class="fa fa-home fa-navbar"></i> Docs</a>
-            <a href="https://github.com/mcasimir/mobile-angular-ui" class="btn btn-navbar"><i class="fa fa-github fa-navbar"></i> Sources</a>
-            <a href="https://github.com/mcasimir/mobile-angular-ui/issues" class="btn btn-navbar"><i class="fa fa-exclamation-circle fa-navbar"></i> Issues</a>
+            <a href="#/eems" class="btn btn-navbar"><i class="fa fa-home fa-navbar"></i> EEMs</a>
+            <a href="#/reports" class="btn btn-navbar"><i class="fa fa-github fa-navbar"></i> REPORTS</a>
+            <a href="#/stats" class="btn btn-navbar"><i class="fa fa-exclamation-circle fa-navbar"></i> STATS</a>
+            <a href="#/me" class="btn btn-navbar"><i class="fa fa-exclamation-circle fa-navbar"></i> ME</a>
         </div>
     </div>
 
@@ -81,5 +107,6 @@
     ga('create', 'UA-48036416-1', 'mobileangularui.com');
     ga('send', 'pageview');
 </script>
+
 </body>
 </html>

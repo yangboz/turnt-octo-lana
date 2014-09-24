@@ -1,21 +1,43 @@
 /**
  * Created by yangboz on 14-9-24.
  */
-var app = angular.module('MobileAngularUiExamples', [
+var app = angular.module('rushuApp', [
     "ngRoute",
     "ngTouch",
-    "mobile-angular-ui"
+    "mobile-angular-ui",
+    "ui.chart"
 ]);
+
+app.value('charting', {
+    pieChartOptions: {
+        seriesDefaults: {
+            // Make this a pie chart.
+            renderer: jQuery.jqplot.PieRenderer,
+            rendererOptions: {
+                // Put data labels on the pie slices.
+                // By default, labels show the percentage of the slice.
+                showDataLabels: true
+            }
+        },
+        legend: { show:true, location: 'e' }
+    }
+});
+
+app.controller('DemoCtrl', function ($scope, charting) {
+    $scope.someData = [[
+        ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14],
+        ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+    ]];
+
+    $scope.myChartOpts = charting.pieChartOptions;
+});
 
 app.config(function($routeProvider, $locationProvider) {
     $routeProvider.when('/',          {templateUrl: "views/home.html"});
-    $routeProvider.when('/scroll',    {templateUrl: "views/scroll.html"});
-    $routeProvider.when('/toggle',    {templateUrl: "views/toggle.html"});
-    $routeProvider.when('/tabs',      {templateUrl: "views/tabs.html"});
-    $routeProvider.when('/accordion', {templateUrl: "views/accordion.html"});
-    $routeProvider.when('/overlay',   {templateUrl: "views/overlay.html"});
-    $routeProvider.when('/forms',     {templateUrl: "views/forms.html"});
-    $routeProvider.when('/carousel',  {templateUrl: "views/carousel.html"});
+    $routeProvider.when('/eems',    {templateUrl: "views/eems.html"});
+    $routeProvider.when('/reports',      {templateUrl: "views/reports.html"});
+    $routeProvider.when('/stats',   {templateUrl: "views/stats.html"});
+    $routeProvider.when('/me',     {templateUrl: "views/me.html"});
 });
 
 
@@ -132,4 +154,5 @@ app.controller('MainController', function($rootScope, $scope, analytics){
         { name: "Ebony Rice", online: false }
     ];
 
+    $scope.user = {username:'',password:'',loggedin:false};
 });

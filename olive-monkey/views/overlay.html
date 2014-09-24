@@ -7,7 +7,6 @@
  <div class="scrollable-content">
    <div class="section section-break container-fluid">
      <a href="#overlay1" class="btn btn-default" toggle="on">Show Overlay 1</a>
-     <a href="#overlay2" class="btn btn-default" toggle="on">Show Overlay 2</a>
    </div>
 
    <div class="section container">
@@ -19,22 +18,27 @@
 </div>
 
 <div overlay="overlay1" default="active">
-  <h4 class="overlay-title">First Overlay</h4>    
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, ex eaque possimus ipsa ab quasi quos corporis consequatur laudantium? Ab assumenda delectus quo velit voluptates doloribus. Earum odit facilis qui.
-  </p>
-  <p toggle="off" bubble target="overlay1">
-    <span class="btn btn-primary">Ok</span>
-    <span class="btn btn-default">Cancel</span>
-  </p>  
-</div>
+  <h4 class="overlay-title">Login</h4>
 
-<div overlay="overlay2">
-  <h4 class="overlay-title">Second Overlay</h4>    
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, ex eaque possimus ipsa ab quasi quos corporis consequatur laudantium? Ab assumenda delectus quo velit voluptates doloribus. Earum odit facilis qui.
-  </p>
-  <p toggle="off" bubble target="overlay2">
+  <input
+        bs-form-control
+        type="text"
+        ng-model="user.username"
+        label="Username:"
+        label-class="col-xs-3 col-sm-2 col-lg-1"
+        class="col-xs-9 col-sm-10 col-lg-11"
+        placeholder="Your username."
+        />
+    <input
+            bs-form-control
+            type="password"
+            ng-model="user.password"
+            label="Password:"
+            label-class="col-xs-3 col-sm-2 col-lg-1"
+            class="col-xs-9 col-sm-10 col-lg-11"
+            placeholder="Your password."
+            />
+  <p toggle="off" bubble target="overlay1">
     <span class="btn btn-primary">Ok</span>
     <span class="btn btn-default">Cancel</span>
   </p>  
