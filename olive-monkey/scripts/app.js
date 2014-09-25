@@ -11,30 +11,6 @@ var app = angular.module('rushuApp', [
 
 var API_URL = "http://localhost:8080/activiti-rest/";
 
-app.value('charting', {
-    pieChartOptions: {
-        seriesDefaults: {
-            // Make this a pie chart.
-            renderer: jQuery.jqplot.PieRenderer,
-            rendererOptions: {
-                // Put data labels on the pie slices.
-                // By default, labels show the percentage of the slice.
-                showDataLabels: true
-            }
-        },
-        legend: { show:true, location: 'e' }
-    }
-});
-
-app.controller('DemoCtrl', function ($scope, charting) {
-    $scope.someData = [[
-        ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14],
-        ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
-    ]];
-
-    $scope.myChartOpts = charting.pieChartOptions;
-});
-
 app.config(function($routeProvider, $locationProvider) {
     $routeProvider.when('/',          {templateUrl: "views/home.html"});
     $routeProvider.when('/eems',    {templateUrl: "views/eems.html"});
@@ -60,10 +36,10 @@ app.config(function($routeProvider, $locationProvider) {
 });
 
 app.controller('MainController', function($scope, $http, UserService, Base64, $rootScope, $location){
-
+///Basic
     $rootScope.$on("$routeChangeStart", function(){
         $rootScope.loading = true;
-        //Overlay login
+        //Overlay with login status
         $rootScope.toggle('loginOverlay',$rootScope.loggedin?'off':'on');
     });
 
@@ -71,6 +47,7 @@ app.controller('MainController', function($scope, $http, UserService, Base64, $r
         $rootScope.loading = false;
     });
 
+///FixtureData
     var scrollItems = [];
 
     for (var i=1; i<=100; i++) {
@@ -82,34 +59,11 @@ app.controller('MainController', function($scope, $http, UserService, Base64, $r
 
     $scope.userAgent =  navigator.userAgent;
     $scope.chatUsers = [
-        { name: "Carlos  Flowers", online: true },
-        { name: "Byron Taylor", online: true },
-        { name: "Jana  Terry", online: true },
-        { name: "Darryl  Stone", online: true },
-        { name: "Fannie  Carlson", online: true },
-        { name: "Holly Nguyen", online: true },
-        { name: "Bill  Chavez", online: true },
-        { name: "Veronica  Maxwell", online: true },
-        { name: "Jessica Webster", online: true },
-        { name: "Jackie  Barton", online: true },
-        { name: "Crystal Drake", online: false },
-        { name: "Milton  Dean", online: false },
-        { name: "Joann Johnston", online: false },
-        { name: "Cora  Vaughn", online: false },
-        { name: "Nina  Briggs", online: false },
-        { name: "Casey Turner", online: false },
-        { name: "Jimmie  Wilson", online: false },
-        { name: "Nathaniel Steele", online: false },
-        { name: "Aubrey  Cole", online: false },
-        { name: "Donnie  Summers", online: false },
-        { name: "Kate  Myers", online: false },
-        { name: "Priscilla Hawkins", online: false },
         { name: "Joe Barker", online: false },
         { name: "Lee Norman", online: false },
         { name: "Ebony Rice", online: false }
     ];
-
-    //
+///UserLogin
     $rootScope.loggedUser = {
 
     };
@@ -126,44 +80,36 @@ app.controller('MainController', function($scope, $http, UserService, Base64, $r
             $rootScope.loggedUser = data;
             $rootScope.username = $scope.username;
             $rootScope.password = $scope.password;
-            $location.path('/dashboard');
+//            $location.path('/dashboard');
+            //Overlay with login status
+            $rootScope.toggle('loginOverlay',$rootScope.loggedin?'off':'on');
         });
     };
 });
 
-
-/////////////
-var alfrescoBlogApp = angular.module('alfrescoBlogApp', ['ngResource', 'ui.bootstrap', "ngRoute"])
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider
-            .when('/', {
-                templateUrl: 'partials/login.html',
-                controller: 'LoginCtrl'
-            })
-            .when('/dashboard', {
-                templateUrl: 'partials/dashboard.html',
-                controller: 'DashboardCtrl'
-            }).when('/users', {
-                templateUrl: 'partials/users.html',
-                controller: 'UsersCtrl'
-            }).when('/groups', {
-                templateUrl: 'partials/groups.html',
-                controller: 'GroupsCtrl'
-            })
-            .otherwise({
-                redirectTo: '/'
-            });
-    }]);
-
-app.controller('RootCtrl', function ($scope, $http, UserService, Base64, $rootScope, $location) {
-    $scope.logout = function () {
-        Session.clear();
-        $location.path('/login');
+///Controllers
+app.value('charting', {
+    pieChartOptions: {
+        seriesDefaults: {
+            // Make this a pie chart.
+            renderer: jQuery.jqplot.PieRenderer,
+            rendererOptions: {
+                // Put data labels on the pie slices.
+                // By default, labels show the percentage of the slice.
+                showDataLabels: true
+            }
+        },
+        legend: { show:true, location: 'e' }
     }
-    $scope.changeView = function (view) {
-        $location.path(view);
-    }
+});
 
+app.controller('ReportsCtrl', function ($scope, charting) {
+    $scope.someData = [[
+        ['Heavy Industry', 12],['Retail', 9], ['Light Industry', 14],
+        ['Out of home', 16],['Commuting', 7], ['Orientation', 9]
+    ]];
+
+    $scope.myChartOpts = charting.pieChartOptions;
 });
 
 app.controller('UsersCtrl', function ($scope, $http, UserService, $rootScope, $location, $modal) {
@@ -361,17 +307,30 @@ app.controller('GroupsCtrl', function ($scope, $rootScope, $location, GroupServi
     $scope.query = "";
 });
 
+//Service REST API
+//@see:http://www.activiti.org/userguide/#N1301E
+///UserService
 app.factory('UserService', function ($resource) {
     var data = $resource(API_URL+'service/identity/users/:user', {user: "@user"});
     return data;
 });
-
+///GroupService
 app.factory('GroupService', function ($resource) {
     var data = $resource(API_URL+'service/identity/groups/:group', {group: "@group"});
     return data;
 });
+///TaskService
+app.factory('TaskService', function ($resource) {
+    var data = $resource(API_URL+'service/runtime/tasks/:task', {task: "@task"});
+    return data;
+});
+///HistoryService
+app.factory('HistoryService', function ($resource) {
+    var data = $resource(API_URL+'service/history/historic-process-instances/:history', {history: "@history"});
+    return data;
+});
 
-
+///HTTP Header communication.
 app.factory('Base64', function () {
     var keyStr = 'ABCDEFGHIJKLMNOP' +
         'QRSTUVWXYZabcdef' +
