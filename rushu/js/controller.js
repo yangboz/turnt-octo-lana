@@ -22,7 +22,7 @@ var rushuApp = angular.module('RushuApp', ['ngResource', 'ui.bootstrap', "ngRout
 
 rushuApp.controller('RootCtrl', function ($scope, $http, UserService, Base64, $rootScope, $location) {
     $scope.logout = function () {
-        Ssession.clear();
+        Session.clear();
         $location.path('/login');
     }
     $scope.changeView = function (view) {
@@ -131,6 +131,7 @@ rushuApp.controller('LoginCtrl', function ($scope, $http, UserService, Base64, $
             $rootScope.username = $scope.username;
             $rootScope.password = $scope.password;
             $location.path('/dashboard');
+            console.log("UserService login success!");
         });
     };
 });
