@@ -97,6 +97,35 @@
         <ng-view class="app-content" ng-hide="loading"></ng-view>
     </div>
 
+    <!-- Login Overlay -->
+
+    <div overlay="loginOverlay" default="active">
+        <h4 class="overlay-title">Login</h4>
+
+        <input
+                bs-form-control
+                type="text"
+                ng-model="user.username"
+                label="Username:"
+                label-class="col-xs-3 col-sm-2 col-lg-1"
+                class="col-xs-9 col-sm-10 col-lg-11"
+                placeholder="Your username."
+                />
+        <input
+                bs-form-control
+                type="password"
+                ng-model="user.password"
+                label="Password:"
+                label-class="col-xs-3 col-sm-2 col-lg-1"
+                class="col-xs-9 col-sm-10 col-lg-11"
+                placeholder="Your password."
+                />
+        <p toggle="off" bubble target="loginOverlay">
+            <span class="btn btn-primary">Ok</span>
+            <span class="btn btn-default">Cancel</span>
+        </p>
+    </div>
+
 </div><!-- ~ .app -->
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

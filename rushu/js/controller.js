@@ -1,4 +1,4 @@
-var rushuApp = angular.module('rushuApp', ['ngResource', 'ui.bootstrap', "ngRoute"])
+var rushuApp = angular.module('RushuApp', ['ngResource', 'ui.bootstrap', "ngRoute"])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/', {
@@ -22,7 +22,7 @@ var rushuApp = angular.module('rushuApp', ['ngResource', 'ui.bootstrap', "ngRout
 
 rushuApp.controller('RootCtrl', function ($scope, $http, UserService, Base64, $rootScope, $location) {
     $scope.logout = function () {
-        Session.clear();
+        Ssession.clear();
         $location.path('/login');
     }
     $scope.changeView = function (view) {
@@ -67,7 +67,7 @@ rushuApp.controller('UsersCtrl', function ($scope, $http, UserService, $rootScop
     };
 
     /**
-     * Controler for handling modal
+     * Controller for handling modal
      * @param $scope
      * @param $modalInstance
      * @param newUser
