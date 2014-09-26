@@ -35,4 +35,12 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Make dialogs simpler.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
+
+    //@see:http://www.exposix.com/answers/How-do-you-enable-the-Upload-tab-in-Images-on-CKEditor.html
+    config.filebrowserBrowseUrl = '/ckfinder/ckfinder.html';
+    config.filebrowserImageBrowseUrl = '/ckfinder/ckfinder.html?Type=Image';
+    config.filebrowserFlashBrowseUrl = '/ckfinder/ckfinder.html?Type=Flash';
+    config.filebrowserUploadUrl = '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';
+    config.filebrowserImageUploadUrl = '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';
+//    config.filebrowserFlashUploadUrl = '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
 };
